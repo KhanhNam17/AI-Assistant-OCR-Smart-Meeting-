@@ -5,6 +5,10 @@ Hệ thống AI xử lý công việc văn phòng và hội họp **hoàn toàn 
 1. **Cuộc họp thông minh (Smart Meeting Studio):** Thu âm trực tiếp hoặc phát lại file âm thanh, nhận dạng tiếng Việt thời gian thực (Streaming STT), phân tách người nói tự động (Online Diarization), định danh giọng nói đại biểu (VoiceID 192-dim) và xuất biên bản cuộc họp `.docx` chuẩn mẫu.
 2. **Khôi phục & OCR Tài liệu (Document OCR):** Nhận dạng văn bản từ file scan/ảnh/PDF, bóc tách cấu trúc bảng biểu dạng HTML lưới, tái tạo bố cục nguyên bản (Layout Reconstruction) và xuất ra file Word/PDF sẵn sàng biên tập.
 
+<p align="center">
+  <img src="assets/demo.png" alt="Giao diện Trợ lý Cuộc họp thông minh & OCR" width="900">
+</p>
+
 ---
 
 ## 📑 Mục lục
@@ -134,6 +138,10 @@ STT-offline-uc2/
 │   ├── metrics.py                       # Thuật toán tính WER, CER, DER
 │   ├── thresholds.py                    # Ngưỡng đánh giá Pass/Fail
 │   └── tools/run_evaluate.py            # Lõi benchmark OCR và cấu trúc bảng
+│
+├── assets/                              # Tài nguyên đồ họa, logo & ảnh minh họa
+│   ├── logo_vnpt.png                    # Logo công ty
+│   └── demo.png                         # Ảnh chụp minh họa giao diện hệ thống
 │
 ├── models/                              # Thư mục chứa weights của các model AI cục bộ
 ├── start.bat                            # Script 1-click khởi chạy ứng dụng trên Windows
