@@ -1,0 +1,283 @@
+{
+  "v_01dd8fb9": {
+    "id": "v_01dd8fb9",
+    "name": "Tuấn Dương",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_01dd8fb9.wav",
+    "vector_path": "enrollment_data\\vectors\\v_01dd8fb9.npy",
+    "created_at": "2026-06-15 14:30:24",
+    "updated_at": "2026-06-27 10:17:34"
+  },
+  "v_2e680b8f": {
+    "id": "v_2e680b8f",
+    "name": "Phóng Viên",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_2e680b8f.wav",
+    "vector_path": "enrollment_data\\vectors\\v_2e680b8f.npy",
+    "created_at": "2026-06-15 14:30:41",
+    "updated_at": "2026-06-27 10:17:23"
+  },
+  "v_1437970f": {
+    "id": "v_1437970f",
+    "name": "Nguyễn Văn Tiền",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_1437970f.wav",
+    "vector_path": "enrollment_data\\vectors\\v_1437970f.npy",
+    "created_at": "2026-06-15 14:31:00",
+    "updated_at": "2026-06-27 10:17:12"
+  },
+  "v_e9af3382": {
+    "id": "v_e9af3382",
+    "name": "Lê Văn Khảm",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_e9af3382.wav",
+    "vector_path": "enrollment_data\\vectors\\v_e9af3382.npy",
+    "created_at": "2026-06-15 14:31:17",
+    "updated_at": "2026-06-27 10:17:00"
+  },
+  "v_db26f10b": {
+    "id": "v_db26f10b",
+    "name": "Minh Khương",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_db26f10b.wav",
+    "vector_path": "enrollment_data\\vectors\\v_db26f10b.npy",
+    "created_at": "2026-06-16 08:31:54",
+    "updated_at": "2026-06-27 10:16:46"
+  },
+  "v_cb4489b1": {
+    "id": "v_cb4489b1",
+    "name": "Tuấn Đức",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_cb4489b1.wav",
+    "vector_path": "enrollment_data\\vectors\\v_cb4489b1.npy",
+    "created_at": "2026-06-16 08:32:23",
+    "updated_at": "2026-06-27 10:16:32"
+  },
+  "v_23c9d5b5": {
+    "id": "v_23c9d5b5",
+    "name": "Trần Thị Trang",
+    "source": "upload",
+    "status": "inactive",
+    "has_vector": true,
+    "preview_path": "enrollment_data\\audio_previews\\v_23c9d5b5.wav",
+    "vector_path": "enrollment_data\\vectors\\v_23c9d5b5.npy",
+    "created_at": "2026-06-16 08:33:04",
+    "updated_at": "2026-06-27 10:16:21"
+  },
+  "v_98cd99b1": {
+    "id": "v_98cd99b1",
+    "name": "Huy",
+    "group": "Nhóm 2: Podcast",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_98cd99b1_0.wav",
+      "enrollment_data\\audio_previews\\v_98cd99b1_1.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_98cd99b1_0.npy",
+      "enrollment_data\\vectors\\v_98cd99b1_1.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_98cd99b1_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_98cd99b1_0.npy",
+    "created_at": "2026-06-27 09:44:46",
+    "updated_at": "2026-06-27 09:44:47"
+  },
+  "v_6b3b54f2": {
+    "id": "v_6b3b54f2",
+    "name": "Tân",
+    "group": "Nhóm 2: Podcast",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_6b3b54f2_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_6b3b54f2_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_6b3b54f2_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_6b3b54f2_0.npy",
+    "created_at": "2026-06-27 09:45:31",
+    "updated_at": "2026-06-27 09:45:31"
+  },
+  "v_fc8194ba": {
+    "id": "v_fc8194ba",
+    "name": "Đức",
+    "group": "Nhóm 2: Podcast",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_fc8194ba_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_fc8194ba_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_fc8194ba_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_fc8194ba_0.npy",
+    "created_at": "2026-06-27 09:46:05",
+    "updated_at": "2026-06-27 09:46:05"
+  },
+  "v_6565a417": {
+    "id": "v_6565a417",
+    "name": "Thắng",
+    "group": "Nhóm 2: Podcast",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_6565a417_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_6565a417_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_6565a417_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_6565a417_0.npy",
+    "created_at": "2026-06-27 09:47:17",
+    "updated_at": "2026-06-27 09:47:17"
+  },
+  "v_da350095": {
+    "id": "v_da350095",
+    "name": "Hoàng",
+    "group": "Nhóm 2: Podcast",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_da350095_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_da350095_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_da350095_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_da350095_0.npy",
+    "created_at": "2026-06-27 09:47:47",
+    "updated_at": "2026-06-27 09:47:47"
+  },
+  "v_a4081904": {
+    "id": "v_a4081904",
+    "name": "Nam Khánh",
+    "group": "Nhóm 3: Meeting",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_a4081904_0.wav",
+      "enrollment_data\\audio_previews\\v_a4081904_1.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_a4081904_0.npy",
+      "enrollment_data\\vectors\\v_a4081904_1.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_a4081904_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_a4081904_0.npy",
+    "created_at": "2026-06-27 09:48:31",
+    "updated_at": "2026-06-27 09:48:32"
+  },
+  "v_245f696a": {
+    "id": "v_245f696a",
+    "name": "Nguyên",
+    "group": "Nhóm 3: Meeting",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_245f696a_0.wav",
+      "enrollment_data\\audio_previews\\v_245f696a_1.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_245f696a_0.npy",
+      "enrollment_data\\vectors\\v_245f696a_1.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_245f696a_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_245f696a_0.npy",
+    "created_at": "2026-06-27 09:49:07",
+    "updated_at": "2026-06-27 09:49:08"
+  },
+  "v_609b55aa": {
+    "id": "v_609b55aa",
+    "name": "Giang",
+    "group": "Nhóm 3: Meeting",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_609b55aa_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_609b55aa_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_609b55aa_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_609b55aa_0.npy",
+    "created_at": "2026-06-27 09:49:24",
+    "updated_at": "2026-06-27 10:17:58"
+  },
+  "v_1dddc789": {
+    "id": "v_1dddc789",
+    "name": "Minh",
+    "group": "Nhóm 2: Podcast",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_1dddc789_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_1dddc789_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_1dddc789_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_1dddc789_0.npy",
+    "created_at": "2026-06-27 09:50:01",
+    "updated_at": "2026-06-27 09:50:01"
+  },
+  "v_7233e45b": {
+    "id": "v_7233e45b",
+    "name": "Người mở màn",
+    "group": "Nhóm 4: Quốc hội",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_7233e45b_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_7233e45b_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_7233e45b_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_7233e45b_0.npy",
+    "created_at": "2026-07-01 14:37:26",
+    "updated_at": "2026-07-01 14:37:26"
+  },
+  "v_1f5979b7": {
+    "id": "v_1f5979b7",
+    "name": "Chủ nhiệm Văn phòng Quốc hội Lê Quang Mạnh",
+    "group": "Nhóm 4: Quốc hội",
+    "source": "upload",
+    "status": "active",
+    "has_vector": true,
+    "preview_paths": [
+      "enrollment_data\\audio_previews\\v_1f5979b7_0.wav"
+    ],
+    "vector_paths": [
+      "enrollment_data\\vectors\\v_1f5979b7_0.npy"
+    ],
+    "preview_path": "enrollment_data\\audio_previews\\v_1f5979b7_0.wav",
+    "vector_path": "enrollment_data\\vectors\\v_1f5979b7_0.npy",
+    "created_at": "2026-07-01 14:37:53",
+    "updated_at": "2026-07-01 14:37:53"
+  }
+}

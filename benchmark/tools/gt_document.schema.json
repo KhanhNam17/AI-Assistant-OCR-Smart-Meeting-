@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "gt_document.schema.json",
+  "title": "OCR Ground Truth - 1 tai lieu",
+  "description": "Khung chuan cho 1 file ground-truth cua 1 tai lieu OCR. Moi file GT (vd vanban1_gt.json) phai khop schema nay truoc khi dua vao benchmark.",
+  "type": "object",
+  "required": ["doc_id", "source_pdf", "pages"],
+  "properties": {
+    "doc_id": {
+      "type": "string",
+      "description": "Ma dinh danh duy nhat cho tai lieu, dung lam khoa trong manifest.json"
+    },
+    "source_pdf": {
+      "type": "string",
+      "description": "Ten file PDF/anh goc (vd vanban1.pdf)"
+    },
+    "prediction_files": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Danh sach cac file output OCR co the doi chieu voi GT nay (vd vanban1_ocr.md, vanban1_ocr_raw.md)"
+    },
+    "note": {
+      "type": "string",
+      "description": "Ghi chu chung ve qua trinh gan nhan (tuy chon)"
+    },
+    "pages": {
+      "type": "array",
+      "description": "Danh sach cac trang, moi trang chua danh sach block da gan nhan",
+      "items": {"$ref": "#/definitions/page"}
+    }
+  },
+  "definitions": {
+    "page": {
+      "type": "object",
+      "required": ["page", "blocks"],
+      "properties": {
+        "page": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "So thu tu trang, bat dau tu 1"
+        },
+        "n_blocks": {
+          "type": "integer",
+          "description": "So block trong trang (tu dong tinh lai, khong bat buoc nguoi gan nhan dien tay)"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/block"}
+        }
+      }
+    },
+    "block": {
+      "type": "object",
+      "required": ["order", "type", "content_kind", "content", "verified"],
+      "properties": {
+        "order": {
+          "type": "number",
+          "description": "Thu tu doc trong trang. Dung so thap phan (vd 0.5) khi can chen block bi OCR bo sot vao giua 2 block co san, khong phai danh so lai toan bo."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "text", "sub_title", "title", "section_header",
+            "figure_title", "caption", "table", "image",
+            "page_header", "page_footer", "list_item", "formula"
+          ],
+          "description": "Loai block. Danh sach nay khop voi _normalise_label() trong document_pipeline.py (nhanh blocks) va cac tag <|ref|> cua DeepSeek-OCR-2 (nhanh end2end)."
+        },
+        "bbox": {
+          "type": ["array", "null"],
+          "items": {"type": "number"},
+          "minItems": 4,
+          "maxItems": 4,
+          "description": "[x0, y0, x1, y1] theo pixel toa do TOPLEFT. Null neu block duoc them tay (khong co bbox tu OCR goc, vd block bi bo sot)."
+        },
+        "content_kind": {
+          "type": "string",
+          "enum": ["text", "table_html"],
+          "description": "'text' -> truong content la van ban thuong. 'table_html' -> truong content la HTML <table> voi rowspan/colspan day du."
+        },
+        "content": {
+          "type": "string",
+          "description": "Noi dung dung 100%. Rong '' hop le voi type='image' (khong co text de cham CER)."
+        },
+        "verified": {
+          "type": "boolean",
+          "description": "true = da nguoi doi chieu anh trang goc va xac nhan dung. Block co verified=false KHONG duoc dua vao benchmark chinh thuc."
+        },
+        "added_missing": {
+          "type": "boolean",
+          "description": "true = block nay KHONG ton tai trong prediction goc (OCR bo sot hoan toan noi dung). Dung de Metrics Engine tinh rieng 'content loss rate', khong gop chung voi loi chinh ta CER thong thuong."
+        },
+        "note": {
+          "type": "string",
+          "description": "Ghi chu rieng cho block nay (vd ly do them added_missing)"
+        }
+      }
+    }
+  }
+}

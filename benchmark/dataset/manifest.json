@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "documents": [
+    {
+      "doc_id": "vanban1",
+      "gt_path": "dataset\\ground_truth\\vanban1_gt.json",
+      "source_pdf": "vanban1.pdf",
+      "n_pages": 5,
+      "has_table": true,
+      "verified_complete": true,
+      "annotated_at": "2026-08-10"
+    }
+  ]
+}

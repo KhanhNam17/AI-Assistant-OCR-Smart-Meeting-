@@ -1,0 +1,246 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   assets/design_system.css
+   Design System dùng chung cho toàn bộ 7 trang Streamlit — Trợ lý Cuộc họp
+   Gộp từ Design Audit: Typography · Spacing · Color/Contrast · Micro-interactions
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ── 1. DESIGN TOKENS ────────────────────────────────────────────────────── */
+:root{
+    /* Font */
+    --font-ui:    'IBM Plex Sans', sans-serif;
+    --font-data:  'IBM Plex Mono', monospace;
+
+    /* Type scale (12 / 14 / 16 / 18 / 24 / 32) */
+    --fs-label:    11px;
+    --fs-body:     14px;
+    --fs-body-lg:  16px;
+    --fs-title:    20px;
+    --fs-value-sm: 20px;
+    --fs-value-lg: 32px;
+
+    /* Spacing (hệ 4/8px) */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+
+    /* Brand */
+    --brand: #e8520a;
+    --brand-hover: #c44008;
+    --brand-on-light-bg: #c44008; /* dùng khi cam làm màu CHỮ trên nền sáng */
+
+    /* Text — semantic, bám theo theme thay vì hex cứng */
+    --text-primary: var(--text-color);
+    --text-secondary: color-mix(in srgb, var(--text-color) 65%, transparent);
+    --text-tertiary:  color-mix(in srgb, var(--text-color) 45%, transparent);
+
+    /* Border / surface */
+    --border-subtle: color-mix(in srgb, var(--text-color) 15%, transparent);
+    --surface-hover: color-mix(in srgb, var(--text-color) 6%, transparent);
+
+    /* Chỉ báo phụ (đã kiểm tra không phải cặp đỏ/xanh lá thuần) */
+    --accent-blue:   #4da6e8;
+    --accent-green:  #2e8b2e;
+    --accent-purple: #b45ac8;
+    --accent-yellow: #dca028;
+
+    /* Elevation */
+    --radius-card: 8px;
+    --shadow-card: 0 2px 6px rgba(0,0,0,0.06);
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+    --dur-fast: 120ms;
+    --dur-base: 150ms;
+}
+
+/* ── 2. BASE / RESET ─────────────────────────────────────────────────────── */
+html, body, [class*="css"]{ font-family: var(--font-ui); }
+footer{ visibility: hidden; }
+hr{ border-color: var(--border-subtle) !important; }
+
+/* ── 3. TYPOGRAPHY ───────────────────────────────────────────────────────── */
+/* Nhãn nhỏ / eyebrow — mono + uppercase, CHỈ dùng cho cụm từ ngắn (<= 3-4 từ) */
+.label-mono{
+    font-family: var(--font-data);
+    font-size: var(--fs-label);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--brand);
+}
+
+/* Tiêu đề trang lớn — Sans, KHÔNG uppercase, không mono */
+.page-title{
+    font-family: var(--font-ui);
+    font-size: var(--fs-title);
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    text-transform: none;
+    color: var(--text-primary);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--border-subtle);
+    margin-bottom: var(--space-6);
+}
+
+/* Card title — dùng cho tiêu đề từng khối/card trong nội dung */
+.card-title{
+    font-family: var(--font-data);
+    font-size: var(--fs-label);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--brand);
+    margin-bottom: var(--space-3);
+}
+
+/* Mọi con số / % / thời lượng / timestamp — tabular, không nhảy layout */
+.data-value{
+    font-family: var(--font-data);
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+}
+.data-value-lg{ font-size: var(--fs-value-lg); }
+.data-value-sm{ font-size: var(--fs-value-sm); }
+
+/* Text phụ — thay mọi color:#8b949e / #484f58 / #9aa4b0 / opacity cứng */
+.text-secondary{ color: var(--text-secondary) !important; }
+.text-tertiary{  color: var(--text-tertiary)  !important; }
+
+/* ── 4. SPACING / LAYOUT ─────────────────────────────────────────────────── */
+/* Bọc các container cùng hàng để tự động bằng chiều cao — thay cho
+   st.container(height=N) cố định (gây tràn khi dữ liệu dài) */
+.row-equal-height{
+    display: flex;
+    align-items: stretch;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+.row-equal-height > *{ flex: 1 1 0; display: flex; flex-direction: column; }
+
+/* Card chuẩn dùng chung mọi trang, thay cho border/padding viết tay lặp lại */
+.card{
+    background: var(--secondary-background-color);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-card);
+    padding: var(--space-4) var(--space-6);
+    box-shadow: var(--shadow-card);
+    height: 100%;
+}
+.card-accent-top{ border-top: 2px solid var(--brand); }
+
+/* Pill / variant cell (Domain Terms) — khoá chiều cao, tránh so le hàng */
+.variant-cell{
+    min-height: 56px;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: var(--space-1);
+}
+.variant-pill{
+    background: rgba(128,128,128,0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* ── 5. COLOR / BADGE ────────────────────────────────────────────────────── */
+/* Badge cam — chữ đủ đậm để đạt contrast 4.5:1 trên nền cam-nhạt */
+.badge-brand{
+    background: rgba(232,82,10,0.12);
+    color: var(--brand-on-light-bg);
+    border: 1px solid rgba(232,82,10,0.35);
+    font-weight: 700;
+    font-family: var(--font-data);
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Trạng thái REC — giữ nguyên hiệu ứng chớp nhưng contrast đủ ở 2 theme */
+@keyframes rec-blink{ 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+.rec-dot{
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--brand); animation: rec-blink 1.2s ease-in-out infinite;
+    margin-right: 6px;
+}
+
+/* ── 6. MICRO-INTERACTIONS / STATES ──────────────────────────────────────── */
+/* Nút primary — thêm transition còn thiếu trong bản gốc */
+.stButton > button[kind="primary"],
+.stDownloadButton > button[kind="primary"]{
+    background: var(--brand) !important;
+    border: none !important;
+    font-weight: 600 !important;
+    color: white !important;
+    transition: background-color var(--dur-base) var(--ease-out),
+                transform var(--dur-fast) var(--ease-out);
+}
+.stButton > button[kind="primary"]:hover,
+.stDownloadButton > button[kind="primary"]:hover{
+    background: var(--brand-hover) !important;
+    transform: translateY(-1px);
+    cursor: pointer;
+}
+.stButton > button[kind="primary"]:active,
+.stDownloadButton > button[kind="primary"]:active{
+    transform: translateY(0);
+}
+
+/* Nút secondary — hover nhẹ cho đồng bộ */
+.stButton > button:not([kind="primary"]),
+.stDownloadButton > button:not([kind="primary"]){
+    transition: background-color var(--dur-base) var(--ease-out),
+                border-color var(--dur-base) var(--ease-out);
+}
+.stButton > button:not([kind="primary"]):hover,
+.stDownloadButton > button:not([kind="primary"]):hover{
+    background: var(--surface-hover) !important;
+    border-color: var(--brand) !important;
+    cursor: pointer;
+}
+
+/* Sidebar nav (st.page_link) — trước đây KHÔNG có hover state nào */
+[data-testid="stPageLink"]{
+    transition: background-color var(--dur-base) var(--ease-out);
+    border-radius: 6px;
+}
+[data-testid="stPageLink"]:hover{
+    background: rgba(232,82,10,0.08);
+    cursor: pointer;
+}
+
+/* Dòng transcript / list item — thêm state còn thiếu */
+.transcript-row{
+    transition: background-color var(--dur-fast) var(--ease-out);
+    border-radius: 4px;
+    padding: var(--space-2) var(--space-3);
+}
+.transcript-row:hover{
+    background: var(--surface-hover);
+    cursor: pointer;
+}
+
+/* Icon button nhỏ (✏️ 🗑️ ...) — đảm bảo touch target tối thiểu */
+button[title]{
+    min-width: 40px;
+    min-height: 40px;
+    transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+/* Progress bar — đồng bộ màu brand */
+.stProgress > div > div > div{ background: var(--brand) !important; }
+
+/* Input / selectbox focus state rõ ràng hơn (accessibility) */
+.stTextInput input:focus,
+.stSelectbox div[data-baseweb="select"]:focus-within{
+    outline: 2px solid var(--brand) !important;
+    outline-offset: 1px;
+}

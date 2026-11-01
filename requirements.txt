@@ -1,0 +1,62 @@
+# requirements.txt — Smart Meeting (Live Mode only)
+# Cài đặt: pip install -r requirements.txt
+#
+# LƯU Ý cực kỳ quan trọng — môi trường này pin chặt do pyannote.audio 3.1.x:
+#   pip install --no-deps "torch==2.8.0" "torchaudio==2.8.0" "torchvision==0.23.0"
+#   pip install --no-deps "huggingface_hub==0.25.2" "speechbrain==0.5.16" "numpy==1.26.4"
+# Dùng --no-deps khi cài lại để pip KHÔNG tự nâng cấp và phá vỡ các pin.
+
+# ── Streamlit ────────────────────────────────────────────
+streamlit>=1.35.0
+
+# ── Biến môi trường ──────────────────────────────────────
+python-dotenv>=1.0.0
+
+# ── Xử lý audio ─────────────────────────────────────────
+soundfile>=0.12.1
+sounddevice>=0.4.6
+
+# ── Visualizer sóng âm + spectrogram (Live Mode) ─────────
+matplotlib>=3.7.0
+
+# ── AI: PyTorch (backend cho diart + pyannote) ───────────
+# QUAN TRỌNG: cài cả 3 cùng version (--no-deps), nếu không pip sẽ tự upgrade:
+#   pip install --no-deps "torch==2.8.0" "torchaudio==2.8.0" "torchvision==0.23.0"
+# Lý do pin:
+#  - torchaudio>=2.9 đã xoá `AudioMetaData` mà pyannote.audio 3.1 vẫn import
+#    → AttributeError lúc startup.
+#  - torch/torchaudio/torchvision PHẢI cùng MAJOR.MINOR — torchvision compile
+#    sẵn theo ABI của torch, mismatch → "operator torchvision::nms does not exist".
+#    Quy tắc: torch X.Y ↔ torchvision 0.(Y+15) ↔ torchaudio X.Y.
+torch==2.2.2
+torchaudio==2.2.2   
+torchvision==0.17.2
+
+# ── AI: Streaming STT (Zipformer/sherpa-onnx) ────────────
+sherpa-onnx>=1.10.0
+
+# ── AI: Online Speaker Diarization (Live mode) ───────────
+# Diart = pyannote/segmentation-3.0 + embedding (đổi qua env DIART_EMBEDDING):
+#   pyannote/embedding                 — nhẹ, nhanh (mặc định)
+#   speechbrain/spkrec-ecapa-voxceleb  — tách giọng tốt hơn (cần speechbrain
+#                                        0.5.16 + Windows Developer Mode cho symlink)
+# Yêu cầu HF_TOKEN trong .env + chấp nhận điều khoản:
+#   https://huggingface.co/pyannote/segmentation-3.0
+#   https://huggingface.co/pyannote/embedding
+diart>=0.9.0
+# pyannote 3.1.1: tương thích speechbrain.pretrained (0.5.16) cho ECAPA;
+# 3.3+ chuyển sang speechbrain.inference (1.0 API, vỡ env này).
+pyannote.audio==3.1.1
+# HF Hub bỏ alias use_auth_token từ 0.26 → pin 0.25.2.
+huggingface_hub==0.25.2
+# speechbrain 1.0 LazyModule (k2_fsa, nlp) crash lúc import → pin 0.5.16.
+speechbrain==0.5.16
+
+# ── Xuất DOCX ────────────────────────────────────────────
+python-docx>=1.1.0
+
+# ── Tiện ích ─────────────────────────────────────────────
+pandas>=2.0.0
+# numpy 2.0 xoá np.NaN/np.float_ → vỡ pyannote. Pin <2.
+numpy>=1.24.0,<2
+tqdm>=4.66.0

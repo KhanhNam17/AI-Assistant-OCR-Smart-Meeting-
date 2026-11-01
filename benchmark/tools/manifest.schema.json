@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "manifest.schema.json",
+  "title": "OCR Benchmark - Manifest tong hop Ground Truth",
+  "description": "1 file duy nhat liet ke moi tai lieu GT hien co, dung de chon/loc tai lieu khi chay benchmark hang loat. Tuong duong vai tro cua OmniDocBench.json (phan page_info) nhung don gian hoa cho pipeline tieng Viet.",
+  "type": "object",
+  "required": ["documents"],
+  "properties": {
+    "schema_version": {"type": "string", "default": "1.0"},
+    "documents": {
+      "type": "array",
+      "items": {"$ref": "#/definitions/doc_entry"}
+    }
+  },
+  "definitions": {
+    "doc_entry": {
+      "type": "object",
+      "required": ["doc_id", "gt_path", "source_pdf"],
+      "properties": {
+        "doc_id": {
+          "type": "string",
+          "description": "Phai khop voi 'doc_id' ben trong file gt_path tuong ung"
+        },
+        "gt_path": {
+          "type": "string",
+          "description": "Duong dan toi file GT chi tiet (vd benchmark_data/ground_truth/vanban1/gt.json), theo dung gt_document.schema.json"
+        },
+        "source_pdf": {
+          "type": "string",
+          "description": "Duong dan file PDF/anh goc, dung khi can render lai de kiem tra thu cong"
+        },
+        "n_pages": {"type": "integer"},
+        "doc_type": {
+          "type": "string",
+          "description": "Loai van ban, vd: cong_van_hanh_chinh, phu_luc_ky_thuat, bien_ban, hop_dong",
+          "examples": ["cong_van_hanh_chinh", "phu_luc_ky_thuat"]
+        },
+        "has_table": {"type": "boolean"},
+        "table_style": {
+          "type": "string",
+          "enum": ["bordered", "borderless", "mixed", "none"],
+          "description": "Kieu bang chinh trong tai lieu -- dung de loc benchmark rieng cho bang co/khong co vien"
+        },
+        "scan_quality": {
+          "type": "string",
+          "enum": ["clean", "medium", "noisy"],
+          "description": "Danh gia chu quan chat luong scan -- dung de tach nhom benchmark 'scan sach' vs 'scan nhieu' nhu da de xuat o Muc IV/V truoc do"
+        },
+        "dpi": {"type": "integer", "default": 150},
+        "annotated_by": {"type": "string"},
+        "annotated_at": {
+          "type": "string",
+          "format": "date",
+          "description": "YYYY-MM-DD"
+        },
+        "verified_complete": {
+          "type": "boolean",
+          "description": "true chi khi TAT CA block trong gt_path co verified=true. Tu dong kiem bang validate_gt.py, khong tu dien tay."
+        },
+        "notes": {"type": "string"}
+      }
+    }
+  }
+}
