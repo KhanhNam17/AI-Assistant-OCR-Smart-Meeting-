@@ -35,7 +35,7 @@ _log = logging.getLogger(__name__)
 
 # ⚠ SỬA ĐƯỜNG DẪN NÀY CHO ĐÚNG MÁY BẠN (kiểm tra bằng:
 #    conda activate deepseek_ocr && python -c "import sys; print(sys.executable)")
-DEEPSEEK_ENV_PYTHON = r"C:\Users\cunam\anaconda3\envs\deepseek_ocr\python.exe"
+DEEPSEEK_ENV_PYTHON = os.getenv("DEEPSEEK_OCR_PYTHON", r"C:\Users\cunam\anaconda3\envs\deepseek_ocr\python.exe")
 
 
 # ══════════════════════════════════════════════════════════════════════════════

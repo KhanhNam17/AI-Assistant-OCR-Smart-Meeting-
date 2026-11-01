@@ -19,10 +19,9 @@ Hệ thống AI xử lý công việc văn phòng và hội họp **hoàn toàn 
 - [Yêu cầu Hệ thống](#-yêu-cầu-hệ-thống)
 - [Hướng dẫn Cài đặt & Cấu hình](#-hướng-dẫn-cài-đặt--cấu-hình)
   - [Bước 1: Cài đặt FFmpeg](#bước-1-cài-đặt-ffmpeg)
-  - [Bước 2: Chuẩn bị môi trường Python](#bước-2-chuẩn-bị-môi-trường-python)
-  - [Bước 3: Cài đặt các gói phụ thuộc](#bước-3-cài-đặt-các-gói-phụ-thuộc)
-  - [Bước 4: Cấu hình tệp `.env`](#bước-4-cấu-hình-tệp-env)
-  - [Bước 5: Chuẩn bị Model AI](#bước-5-chuẩn-bị-model-ai)
+  - [Bước 2: Chuẩn bị 3 Môi trường Python (Conda Multi-Environment)](#bước-2-chuẩn-bị-3-môi-trường-python-conda-multi-environment)
+  - [Bước 3: Cấu hình tệp `.env` kết nối 3 môi trường](#bước-3-cấu-hình-tệp-env-kết-nối-3-môi-trường)
+  - [Bước 4: Chuẩn bị Model AI](#bước-4-chuẩn-bị-model-ai)
 - [Khởi chạy Ứng dụng](#-khởi-chạy-ứng-dụng)
 - [Hướng dẫn Sử dụng các Phân hệ](#-hướng-dẫn-sử-dụng-các-phân-hệ)
   - [1. Dashboard — Trạm kiểm soát trung tâm](#1-dashboard--trạm-kiểm-soát-trung-tâm)
@@ -173,37 +172,68 @@ Hệ thống sử dụng FFmpeg để chuẩn hóa luồng âm thanh về chuẩ
 2. Giải nén vào thư mục cố định (ví dụ: `C:\ffmpeg`).
 3. Thêm đường dẫn `C:\ffmpeg\bin` vào biến môi trường **PATH** của hệ thống (hoặc điền trực tiếp đường dẫn này vào tệp `.env`).
 
-### Bước 2: Chuẩn bị môi trường Python
-Khuyến nghị sử dụng **Python 3.10**:
+### Bước 2: Chuẩn bị 3 Môi trường Python (Conda Multi-Environment)
+
+> 💡 **Tại sao hệ thống cần 3 môi trường Python song song?**  
+> Các lõi AI tiên tiến trong dự án có yêu cầu phiên bản thư viện đối nghịch nhau (Dependency Conflict):  
+> 1. `pyannote.audio 3.1.1` & `diart` bắt buộc cố định ở `torch==2.2.2` (phiên bản mới hơn sẽ xoá `AudioMetaData` gây sập phân tách người nói).  
+> 2. `docling` & `doclayout-yolo` trong OCR yêu cầu PyTorch phiên bản mới hơn (`torch>=2.4`).  
+> 3. `deepseek-ocr` chạy mô hình thị giác cần `transformers 4.46+` và `torch 2.6.0+cpu`.  
+> 
+> Việc tách biệt thành **3 môi trường Conda chuyên biệt** giúp hệ thống vận hành siêu ổn định, triệt tiêu 100% xung đột thư viện.
+
+Khuyến nghị sử dụng **Miniconda** hoặc **Anaconda** (Python 3.10):
+
+#### 1️⃣ Môi trường 1: `smart_meeting_diart` (Môi trường chính & Cuộc họp)
+Chạy ứng dụng chính Streamlit, Streaming STT (Zipformer / sherpa-onnx), Online Diarization (Diart), VoiceID Cam++:
 
 ```bash
-# Tạo môi trường ảo venv
-python -m venv venv
+# 1. Tạo môi trường
+conda create -n smart_meeting_diart python=3.10 -y
+conda activate smart_meeting_diart
 
-# Kích hoạt môi trường trên Windows (Command Prompt hoặc PowerShell):
-venv\Scripts\activate
-
-# Hoặc kích hoạt trên Linux/macOS:
-source venv/bin/activate
-```
-
-### Bước 3: Cài đặt các gói phụ thuộc
-> ⚠️ **Lưu ý đặc biệt về PyTorch & Pyannote:**  
-> Để đảm bảo tính tương thích tuyệt đối giữa `pyannote.audio 3.1.1` và `diart`, cần cài đặt theo đúng thứ tự:
-
-```bash
-# 1. Cài đặt PyTorch tương thích ABI
+# 2. Cài đặt PyTorch tương thích ABI cho Diart & Pyannote
 pip install torch==2.2.2 torchaudio==2.2.2 torchvision==0.17.2
 
-# 2. Cài đặt các gói phụ trợ pin phiên bản
+# 3. Cài đặt các gói phụ trợ cố định phiên bản
 pip install huggingface_hub==0.25.2 speechbrain==0.5.16 "numpy>=1.24.0,<2"
 
-# 3. Cài đặt toàn bộ các thư viện còn lại trong requirements.txt
+# 4. Cài đặt các thư viện Smart Meeting còn lại
 pip install -r requirements.txt
 ```
 
-### Bước 4: Cấu hình tệp `.env`
-Sao chép tệp mẫu `.env.example` thành `.env` và điền các giá trị cấu hình thực tế:
+#### 2️⃣ Môi trường 2: `uc3_ocr` (Pipeline OCR & Khôi phục Bố cục)
+Chuyên trách phân tích cấu trúc trang tài liệu (YOLO DocLayNet), bóc tách bảng biểu (`img2table`), xử lý ảnh trang và xuất bản DOCX/PDF:
+
+```bash
+# 1. Tạo môi trường
+conda create -n uc3_ocr python=3.10 -y
+conda activate uc3_ocr
+
+# 2. Cài đặt các thư viện xử lý tài liệu & OCR
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+pip install pymupdf pdf2image reportlab python-docx openpyxl xlsxwriter
+pip install doclayout-yolo docling img2table easyocr vietocr rapidocr
+pip install streamlit streamlit-pdf-viewer
+```
+
+#### 3️⃣ Môi trường 3: `deepseek_ocr` (Worker AI Nhận dạng Văn bản)
+Chạy ngầm persistent worker cho mô hình DeepSeek OCR để đạt độ chính xác cao nhất mà không cần tải lại model giữa các trang:
+
+```bash
+# 1. Tạo môi trường
+conda create -n deepseek_ocr python=3.10 -y
+conda activate deepseek_ocr
+
+# 2. Cài đặt PyTorch CPU & Transformers
+pip install torch==2.6.0+cpu torchvision==0.21.0+cpu torchaudio==2.11.0+cpu --index-url https://download.pytorch.org/whl/cpu
+pip install transformers==4.46.3 pymupdf==1.28.0 pillow easydict addict
+```
+
+---
+
+### Bước 3: Cấu hình tệp `.env` kết nối 3 môi trường
+Sao chép tệp mẫu `.env.example` thành `.env` và điền đường dẫn tới `python.exe` của 2 môi trường phụ:
 
 ```bash
 # Trên Windows:
@@ -213,28 +243,35 @@ copy .env.example .env
 cp .env.example .env
 ```
 
-Nội dung chi tiết trong tệp `.env`:
+Kiểm tra đường dẫn `python.exe` của từng môi trường bằng lệnh:
+```bash
+conda activate uc3_ocr && python -c "import sys; print(sys.executable)"
+conda activate deepseek_ocr && python -c "import sys; print(sys.executable)"
+```
+
+Điền các giá trị vào tệp `.env`:
 
 ```env
 # Hugging Face Token (Bắt buộc cho phân hệ Diart / Pyannote)
-# Tạo token miễn phí tại: https://huggingface.co/settings/tokens (Quyền Read)
-# Đồng thời cần bấm 'Agree' tại:
-# 1. https://huggingface.co/pyannote/segmentation-3.0
-# 2. https://huggingface.co/pyannote/embedding
 HF_TOKEN=hf_your_huggingface_token_here
 
-# Đường dẫn đến file ffmpeg.exe (Nếu đã thêm vào PATH thì có thể để trống hoặc điền 'ffmpeg')
+# Đường dẫn đến file ffmpeg.exe
 FFMPEG_PATH=C:\ffmpeg\bin\ffmpeg.exe
 
 # Cấu hình Diart Online Diarization
 DIART_PRESET=voxconverse
 DIART_EMBEDDING=pyannote/embedding
 DIART_DEVICE=cpu
-DIART_STEP=0.5
-DIART_LATENCY=3.5
+
+# ── KẾT NỐI 3 MÔI TRƯỜNG CONDA ──────────────────────────────────────────
+# Đường dẫn python của môi trường uc3_ocr
+UC3_OCR_PYTHON=C:\Users\Username\anaconda3\envs\uc3_ocr\python.exe
+
+# Đường dẫn python của môi trường deepseek_ocr
+DEEPSEEK_OCR_PYTHON=C:\Users\Username\anaconda3\envs\deepseek_ocr\python.exe
 ```
 
-### Bước 5: Chuẩn bị Model AI
+### Bước 4: Chuẩn bị Model AI
 Đảm bảo các mô hình đã được tải và đặt đúng cấu trúc trong thư mục `models/`:
 * `models/zipformer/`: Mô hình nhận dạng tiếng Việt streaming ONNX.
 * `models/speech_campplus_sv_zh-cn_16k-common/`: Mô hình trích xuất vector giọng nói 192 chiều Cam++.
@@ -242,6 +279,11 @@ DIART_LATENCY=3.5
 ---
 
 ## ⚡ Khởi chạy Ứng dụng
+
+> 📌 **Lưu ý:** Luôn kích hoạt môi trường chính **`smart_meeting_diart`** trước khi chạy:
+> ```bash
+> conda activate smart_meeting_diart
+> ```
 
 ### Cách 1: Khởi động nhanh bằng file `.bat` (Windows)
 Chỉ cần nhấp đúp vào tệp:
