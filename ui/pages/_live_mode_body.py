@@ -314,41 +314,41 @@ def render_live_mode():
         html, body, [class*="css"] { font-family: 'IBM Plex Sans', sans-serif; }
         footer { visibility: hidden; }
 
-        /* VNPT Primary Buttons & Downloads */
+        /* Modern Primary Buttons & Downloads */
         .stButton > button[kind="primary"],
         .stDownloadButton > button[kind="primary"] {
-            background: linear-gradient(135deg, #0060B5 0%, #00417D 100%) !important;
+            background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
             border: none !important;
-            border-radius: 8px !important;
+            border-radius: 10px !important;
             font-weight: 600 !important;
             color: white !important;
-            box-shadow: 0 4px 12px rgba(0, 96, 181, 0.25) !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
             transition: all 0.2s ease !important;
         }
         .stButton > button[kind="primary"]:hover,
         .stDownloadButton > button[kind="primary"]:hover {
-            background: linear-gradient(135deg, #0070D2 0%, #004C87 100%) !important;
+            filter: brightness(1.08) !important;
             transform: translateY(-1px) !important;
-            box-shadow: 0 6px 16px rgba(0, 96, 181, 0.35) !important;
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
         }
         .stButton > button:not([kind="primary"]),
         .stDownloadButton > button:not([kind="primary"]) {
-            border-radius: 8px !important;
+            border-radius: 10px !important;
             font-weight: 500 !important;
         }
 
-        .stProgress > div > div > div { background: #0060B5 !important; border-radius: 4px; }
+        .stProgress > div > div > div { background: #2563EB !important; border-radius: 4px; }
         hr { border-color: rgba(128,128,128,0.15) !important; }
 
         /* Studio Hero Status Card */
         .studio-status-card {
-            background: linear-gradient(135deg, #001A33 0%, #003366 50%, #004C87 100%);
-            border-radius: 12px;
-            padding: 18px 20px;
+            background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
+            border-radius: 16px;
+            padding: 20px 22px;
             color: #ffffff;
-            box-shadow: 0 8px 24px rgba(0, 26, 51, 0.2);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
             margin-bottom: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
         .studio-timer {
             font-family: 'IBM Plex Mono', monospace;
@@ -408,12 +408,12 @@ def render_live_mode():
             margin-bottom: 16px;
         }
         .panel-title {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: #0060B5;
+            color: #2563EB;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -423,16 +423,17 @@ def render_live_mode():
         /* Chat Timeline / Conversation Bubble */
         .chat-bubble {
             background: var(--secondary-background-color);
-            border: 1px solid rgba(128, 128, 128, 0.15);
-            border-radius: 10px;
-            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
             margin-bottom: 10px;
             transition: all 0.15s ease;
             position: relative;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
         }
         .chat-bubble:hover {
-            border-color: rgba(0, 96, 181, 0.35);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+            border-color: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
         }
         .chat-header {
             display: flex;
@@ -441,10 +442,10 @@ def render_live_mode():
             margin-bottom: 6px;
         }
         .chat-ts {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
             color: var(--text-color);
-            opacity: 0.5;
+            opacity: 0.65;
         }
         .chat-text {
             font-size: 14px;
@@ -453,10 +454,10 @@ def render_live_mode():
             margin: 0;
         }
         .streaming-box {
-            background: rgba(0, 96, 181, 0.04);
-            border: 1px dashed rgba(0, 96, 181, 0.35);
-            border-radius: 10px;
-            padding: 12px 16px;
+            background: rgba(37, 99, 235, 0.06);
+            border: 1px dashed rgba(37, 99, 235, 0.35);
+            border-radius: 12px;
+            padding: 14px 18px;
             margin-bottom: 10px;
         }
 
@@ -465,13 +466,13 @@ def render_live_mode():
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             padding: 2px 10px;
-            border-radius: 6px;
+            border-radius: 9999px;
         }
-        .spk-0 { background: rgba(0, 96, 181, 0.12); color: #0060B5; border: 1px solid rgba(0, 96, 181, 0.25); }
+        .spk-0 { background: rgba(37, 99, 235, 0.12); color: #2563EB; border: 1px solid rgba(37, 99, 235, 0.25); }
         .spk-1 { background: rgba(18, 180, 196, 0.12); color: #0E9FAD; border: 1px solid rgba(18, 180, 196, 0.25); }
         .spk-2 { background: rgba(31, 169, 113, 0.12); color: #1FA971; border: 1px solid rgba(31, 169, 113, 0.25); }
         .spk-3 { background: rgba(124, 58, 237, 0.12); color: #7C3AED; border: 1px solid rgba(124, 58, 237, 0.25); }
@@ -495,16 +496,6 @@ def render_live_mode():
     </style>
     """, unsafe_allow_html=True)
 
-    # Nạp logo công ty (assets/logo_vnpt.png) và mã hoá base64 để nhúng trực tiếp vào HTML
-    @st.cache_data(show_spinner=False)
-    def _load_logo_b64():
-        logo_path = Path(__file__).resolve().parent.parent / "assets" / "logo_vnpt.png"
-        if not logo_path.exists():
-            return None
-        return base64.b64encode(logo_path.read_bytes()).decode()
-
-    LOGO_B64 = _load_logo_b64()
-
     REPO_ROOT = Path(__file__).resolve().parent.parent.parent
     UI_ROOT = Path(__file__).resolve().parent.parent
     for p in (REPO_ROOT, UI_ROOT):
@@ -513,15 +504,13 @@ def render_live_mode():
 
     from theme import icon
 
-
-
     st.markdown(f"""
-    <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid rgba(128,128,128,0.18);">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:18px;border-bottom:1px solid var(--border-color);">
         <div style="display:flex;align-items:center;gap:10px;">
-            <span style="font-size:16px;font-weight:700;color:var(--text-color);letter-spacing:-0.2px;">Trợ lý Cuộc họp Trực tiếp</span>
-            <span style="font-family:IBM Plex Mono,monospace;font-size:10px;font-weight:700;padding:2px 8px;border-radius:12px;background:rgba(0,96,181,0.12);color:#0060B5;border:1px solid rgba(0,96,181,0.25);letter-spacing:1px;">AI PIPELINE</span>
+            <span style="font-size:16px;font-weight:800;color:var(--text-color);letter-spacing:-0.2px;">Trợ lý Cuộc họp Trực tiếp</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:var(--app-blue-tint, rgba(37,99,235,0.12));color:#2563EB;border:1px solid rgba(37,99,235,0.25);letter-spacing:1px;">AI PIPELINE</span>
         </div>
-        <div style="font-family:IBM Plex Mono,monospace;font-size:11px;color:var(--text-color);opacity:0.65;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-color);opacity:0.65;">
             Sherpa Zipformer · Diart ({DIART_PRESET.upper()}) · Cam++ VoiceID
         </div>
     </div>
@@ -1630,8 +1619,8 @@ def render_live_mode():
 
         # 3. SESSION CONFIGURATION PANEL
         st.markdown(
-            '<div style="font-family:IBM Plex Mono,monospace;font-size:11px;font-weight:700;'
-            'letter-spacing:1px;text-transform:uppercase;color:#0060B5;margin:20px 0 10px;'
+            '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;'
+            'letter-spacing:1px;text-transform:uppercase;color:#2563EB;margin:20px 0 10px;'
             'display:flex;align-items:center;gap:6px;">'
             '⚙️ THIẾT LẬP PHIÊN HỌP</div>',
             unsafe_allow_html=True,
@@ -1837,8 +1826,8 @@ def render_live_mode():
         with stage_h1:
             st.markdown(
                 '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
-                '<span style="font-family:IBM Plex Mono,monospace;font-size:12px;font-weight:700;'
-                'letter-spacing:1.5px;text-transform:uppercase;color:#0060B5;">'
+                '<span style="font-family:\'JetBrains Mono\',monospace;font-size:12px;font-weight:700;'
+                'letter-spacing:1.5px;text-transform:uppercase;color:#2563EB;">'
                 '🎙️ BIÊN BẢN HỘI THOẠI TRỰC TIẾP</span>'
                 '</div>',
                 unsafe_allow_html=True,
@@ -1890,8 +1879,8 @@ def render_live_mode():
             if st.session_state.get("l_show_live_text", True):
                 if not turns and not st.session_state.l_partial:
                     st.markdown(
-                        '<div style="background:var(--secondary-background-color);border:1px dashed rgba(0,96,181,0.25);'
-                        'border-radius:12px;padding:48px 20px;text-align:center;margin-bottom:12px;">'
+                        '<div style="background:var(--secondary-background-color);border:1px dashed rgba(37,99,235,0.35);'
+                        'border-radius:14px;padding:48px 20px;text-align:center;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,0.02);">'
                         '<div style="font-size:36px;margin-bottom:10px;">🎙️</div>'
                         '<div style="font-weight:600;font-size:14px;color:var(--text-color);margin-bottom:4px;">'
                         'Đang lắng nghe âm thanh từ Micro...</div>'
@@ -1980,8 +1969,8 @@ def render_live_mode():
         # 5. EXPORT & PERSISTENCE DOCK
         if turns and (st.session_state.l_finished or st.session_state.l_diar_done):
             st.markdown(
-                '<div style="font-family:IBM Plex Mono,monospace;font-size:11px;font-weight:700;'
-                'letter-spacing:1px;text-transform:uppercase;color:#0060B5;margin:28px 0 12px;'
+                '<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;font-weight:700;'
+                'letter-spacing:1px;text-transform:uppercase;color:#2563EB;margin:28px 0 12px;'
                 'display:flex;align-items:center;gap:6px;">'
                 '📥 XUẤT BIÊN BẢN & LƯU TRỮ PHIÊN HỌP</div>',
                 unsafe_allow_html=True,

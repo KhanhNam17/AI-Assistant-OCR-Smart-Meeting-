@@ -42,43 +42,49 @@ st.markdown("""
 <style>
     /* ── CSS Smart Meeting Review ── */
     .rv-card-title {
-        font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-        letter-spacing: 2px; text-transform: uppercase; color: #0067B1;
-        margin-bottom: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+        font-family: 'JetBrains Mono', monospace; font-size: 11px;
+        letter-spacing: 2px; text-transform: uppercase; color: #2563EB;
+        margin-bottom: 14px; font-weight: 700; display: flex; align-items: center; gap: 8px;
     }
     .stButton > button[kind="primary"],
     .stDownloadButton > button[kind="primary"] {
-        background: #0067B1 !important; border: none !important;
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+        border: none !important;
         font-weight: 600 !important; color: white !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+        border-radius: 10px !important;
     }
     .stButton > button[kind="primary"]:hover,
-    .stDownloadButton > button[kind="primary"]:hover { background: #004C87 !important; }
+    .stDownloadButton > button[kind="primary"]:hover {
+        filter: brightness(1.08) !important;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
+    }
 
     /* ── CSS OCR Review ── */
     .stSelectbox label { font-size: 1.05rem !important; font-weight: 700 !important; }
-    .vnpt-translate-card {
-        border-radius: var(--vnpt-radius-md);
+    .app-translate-card {
+        border-radius: var(--app-radius-lg);
         padding: 16px 20px; text-align: center; margin-bottom: 14px;
     }
-    .vnpt-translate-card.on {
-        background: var(--vnpt-blue-tint-2); border: 1px solid var(--vnpt-blue-light);
+    .app-translate-card.on {
+        background: var(--app-blue-surface); border: 1px solid rgba(37, 99, 235, 0.3);
     }
-    .vnpt-translate-card.off {
-        background: rgba(148,163,184,0.10); border: 1px solid var(--border-color);
+    .app-translate-card.off {
+        background: var(--secondary-background-color); border: 1px solid rgba(148, 163, 184, 0.22);
     }
-    .vnpt-translate-card .badge-label {
+    .app-translate-card .badge-label {
         font-weight: 800; font-size: 13.5px; display: flex; align-items: center;
         justify-content: center; gap: 8px; margin-bottom: 4px;
     }
-    .vnpt-translate-card.on .badge-label { color: var(--vnpt-blue); }
-    .vnpt-translate-card.off .badge-label { color: var(--text-color); opacity: 0.7; }
-    .vnpt-translate-direction { font-weight: 700; font-size: 14px; opacity: 0.85; }
-    .vnpt-info-field { }
-    .vnpt-info-label {
-        font-size: 11.5px; font-weight: 800; letter-spacing: 0.4px;
-        color: var(--text-color); opacity: 0.55; text-transform: uppercase; margin-bottom: 4px;
+    .app-translate-card.on .badge-label { color: #2563EB; }
+    .app-translate-card.off .badge-label { color: var(--text-color); opacity: 0.7; }
+    .app-translate-direction { font-weight: 700; font-size: 14px; color: var(--text-color); }
+    .app-info-field { }
+    .app-info-label {
+        font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+        color: var(--text-color); opacity: 0.65; text-transform: uppercase; margin-bottom: 4px;
     }
-    .vnpt-info-value { font-size: 14px; font-weight: 600; word-wrap: break-word; }
+    .app-info-value { font-size: 14px; font-weight: 600; word-wrap: break-word; color: var(--text-color); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -86,17 +92,16 @@ st.markdown("""
 # 3. TIÊU ĐỀ CHÍNH
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown("""
-<div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;
-            color:var(--text-color);opacity:0.7;padding-bottom:12px;
-            border-bottom:1px solid rgba(128,128,128,0.2);margin-bottom:16px;">
-    📂  Xem lại phiên xử lý — Review Sessions
+<div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            color:#2563EB;padding-bottom:12px;border-bottom:1px solid rgba(148,163,184,0.22);margin-bottom:18px;">
+    📂  XEM LẠI PHIÊN XỬ LÝ — REVIEW SESSIONS
 </div>
 """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════════════════════
 # 4. HELPER DÙNG CHUNG CHO TAB SMART MEETING
 # ══════════════════════════════════════════════════════════════════════════════
-SPEAKER_COLORS = ["#0067B1", "#0D9488", "#7C3AED", "#D97706", "#DB2777", "#475569"]
+SPEAKER_COLORS = ["#2563EB", "#0D9488", "#7C3AED", "#D97706", "#DB2777", "#475569"]
 
 
 def _speaker_color(idx: int) -> str:
@@ -131,7 +136,7 @@ def render_waveform_player(audio_bytes: bytes, height: int = 70) -> None:
     html = f"""
     <div id="waveform" style="cursor:pointer;"></div>
     <div style="display:flex;align-items:center;gap:10px;margin-top:10px;">
-        <button id="playBtn" style="background:#0067B1;border:none;color:white;
+        <button id="playBtn" style="background:#2563EB;border:none;color:white;
             width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:13px;
             flex-shrink:0;">▶</button>
         <span id="timeLabel" style="font-family:monospace;font-size:12px;color:#8b949e;">0:00 / 0:00</span>
@@ -140,8 +145,8 @@ def render_waveform_player(audio_bytes: bytes, height: int = 70) -> None:
     <script>
         const wavesurfer = WaveSurfer.create({{
             container: '#waveform',
-            waveColor: '#4da6e8',
-            progressColor: '#0067B1',
+            waveColor: '#93C5FD',
+            progressColor: '#2563EB',
             cursorColor: '#ffffff',
             barWidth: 2,
             barGap: 1,
@@ -630,8 +635,8 @@ with tab_ocr:
                     ]
                     for col, label, value in fields:
                         col.markdown(
-                            f'<div class="vnpt-info-field"><div class="vnpt-info-label">{label}</div>'
-                            f'<div class="vnpt-info-value">{value}</div></div>',
+                            f'<div class="app-info-field"><div class="app-info-label">{label}</div>'
+                            f'<div class="app-info-value">{value}</div></div>',
                             unsafe_allow_html=True,
                         )
                 else:
@@ -641,15 +646,15 @@ with tab_ocr:
             with st.container(border=True):
                 st.subheader("Trạng thái xử lý")
                 status_badge = (
-                    f'<span class="vnpt-badge vnpt-badge-on">{icon("check", 12)} Thành công</span>'
+                    f'<span class="app-badge app-badge-on">{icon("check", 12)} Thành công</span>'
                     if exit_code == 0 else
-                    f'<span class="vnpt-badge vnpt-badge-off">{icon("cross", 12)} Lỗi ({exit_code})</span>'
+                    f'<span class="app-badge app-badge-off">{icon("cross", 12)} Lỗi ({exit_code})</span>'
                 )
                 pdf_ready = target_pdf.exists()
                 pdf_badge = (
-                    f'<span class="vnpt-badge vnpt-badge-on">{icon("check", 12)} Đã sinh PDF</span>'
+                    f'<span class="app-badge app-badge-on">{icon("check", 12)} Đã sinh PDF</span>'
                     if pdf_ready else
-                    f'<span class="vnpt-badge vnpt-badge-neutral">{icon("clock", 12)} Chưa có PDF</span>'
+                    f'<span class="app-badge app-badge-neutral">{icon("clock", 12)} Chưa có PDF</span>'
                 )
                 st.markdown(
                     f"""

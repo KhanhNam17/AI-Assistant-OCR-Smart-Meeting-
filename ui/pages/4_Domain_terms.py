@@ -32,24 +32,34 @@ render_sidebar(active="domain_terms")
 st.markdown("""
 <style>
     .stButton > button[kind="primary"] {
-        background: #0067B1 !important; border: none !important;
-        font-weight: 600 !important; color: white !important;
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+        border: none !important;
+        font-weight: 600 !important;
+        color: white !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+        border-radius: 10px !important;
     }
-    .stButton > button[kind="primary"]:hover { background: #004C87 !important; }
+    .stButton > button[kind="primary"]:hover {
+        filter: brightness(1.08) !important;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
+    }
     
     .table-header {
-        font-family: 'IBM Plex Mono', monospace; font-size: 10px; 
-        letter-spacing: 1.5px; text-transform: uppercase; color: #0067B1; 
-        padding-bottom: 8px; font-weight: 600;
+        font-family: 'JetBrains Mono', monospace; font-size: 11px; 
+        letter-spacing: 1.5px; text-transform: uppercase; color: #2563EB; 
+        padding-bottom: 8px; font-weight: 700;
     }
-    .row-text { font-size: 13px; padding-top: 12px; color: var(--text-color); }
-    .row-idx { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-color); opacity: 0.4; padding-top: 12px;}
+    .row-text { font-size: 13.5px; padding-top: 10px; color: var(--text-color); font-weight: 500; }
+    .row-idx { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-color); opacity: 0.55; padding-top: 10px;}
     .variant-pill {
-        display: inline-block; background: rgba(128,128,128,0.15);
-        padding: 2px 8px; border-radius: 4px; margin: 2px; font-size: 12px;
+        display: inline-block; background: rgba(37, 99, 235, 0.12);
+        border: 1px solid rgba(37, 99, 235, 0.3);
+        color: #3B82F6;
+        padding: 3px 10px; border-radius: 9999px; margin: 2px; font-size: 12px;
+        font-weight: 600;
     }
-    .test-success { color: #16A34A; font-weight: 600; font-size: 12px; }
-    .test-fail { color: #D97706; font-size: 12px; }
+    .test-success { color: #10B981; font-weight: 700; font-size: 12.5px; }
+    .test-fail { color: #F59E0B; font-size: 12.5px; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -110,7 +120,7 @@ if "term_show_add" not in st.session_state:
 # ══════════════════════════════════════════════════════════════════════════════
 # 4. HEADER & DOMAIN SELECTOR
 # ══════════════════════════════════════════════════════════════════════════════
-st.markdown('<div style="font-size:11px;letter-spacing:3px;text-transform:uppercase; opacity:0.7; border-bottom:1px solid rgba(128,128,128,0.2); margin-bottom:24px; padding-bottom:12px;">📚 Quản lý Bộ Từ Điển Thuật Ngữ</div>', unsafe_allow_html=True)
+st.markdown('<div style="font-family:\'JetBrains Mono\',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#2563EB;border-bottom:1px solid rgba(148,163,184,0.22);margin-bottom:24px;padding-bottom:12px;">📚 QUẢN LÝ BỘ TỪ ĐIỂN THUẬT NGỮ CHUYÊN NGÀNH</div>', unsafe_allow_html=True)
 
 domain_files = get_domain_files()
 

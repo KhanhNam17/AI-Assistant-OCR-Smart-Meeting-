@@ -79,35 +79,44 @@ OUTPUT_ROOT = REPO_ROOT / "output"               # dữ liệu OCR
 SESSIONS_DIR = os.path.join("data", "sessions")  # dữ liệu Smart Meeting
 
 # ══════════════════════════════════════════════════════════════════════════════
-# 2. CSS RIÊNG CHO TAB CUỘC HỌP (metric-card/score-card kiểu cũ)
+# 2. CSS RIÊNG CHO TAB CUỘC HỌP
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown("""
 <style>
     .stButton > button[kind="primary"] {
-        background: #0067B1 !important; border: none !important;
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+        border: none !important;
         font-weight: 600 !important; color: white !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+        border-radius: 10px !important;
     }
     .metric-card {
         background: var(--secondary-background-color);
-        padding: 20px; border-radius: 12px;
-        border: 1px solid rgba(128,128,128,0.2);
+        padding: 22px; border-radius: 16px;
+        border: 1px solid rgba(148, 163, 184, 0.22);
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         height: 100%;
+        transition: all 0.2s ease;
     }
-    .metric-val { font-size: 32px; font-weight: 700; color: #0067B1; margin-bottom: 4px; }
-    .metric-lbl { font-size: 12px; letter-spacing: 1px; opacity: 0.8; text-transform: uppercase; font-weight: 600; }
-    .metric-sub { font-size: 11px; opacity: 0.6; margin-top: 8px; }
+    .metric-card:hover {
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+        border-color: rgba(37, 99, 235, 0.4);
+    }
+    .metric-val { font-size: 34px; font-weight: 800; color: #2563EB; margin-bottom: 4px; }
+    .metric-lbl { font-size: 11.5px; letter-spacing: 1px; color: var(--text-color); opacity: 0.7; text-transform: uppercase; font-weight: 700; }
+    .metric-sub { font-size: 11.5px; color: var(--text-color); opacity: 0.65; margin-top: 8px; }
     .score-card {
-        background: linear-gradient(135deg, #0B2540 0%, #0067B1 100%);
-        color: white; border: 1px solid #00A0DC;
-        box-shadow: 0 8px 20px rgba(0,103,177,0.25);
+        background: linear-gradient(135deg, #1E3A8A 0%, #2563EB 100%);
+        color: white; border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.25);
+        border-radius: 16px;
     }
-    .score-card .metric-lbl { color: rgba(255,255,255,0.75); }
-    .score-card .metric-sub { color: rgba(255,255,255,0.6); }
-    .score-card .metric-val { color: #4ADE80; font-size: 48px; }
-    .score-card-bad .metric-val { color: #F87171; font-size: 48px; }
-    .score-card-avg .metric-val { color: #FBBF24; font-size: 48px; }
+    .score-card .metric-lbl { color: rgba(255,255,255,0.85); }
+    .score-card .metric-sub { color: rgba(255,255,255,0.7); }
+    .score-card .metric-val { color: #34D399; font-size: 48px; font-weight: 800; }
+    .score-card-bad .metric-val { color: #F87171; font-size: 48px; font-weight: 800; }
+    .score-card-avg .metric-val { color: #FBBF24; font-size: 48px; font-weight: 800; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -115,10 +124,9 @@ st.markdown("""
 # 3. TIÊU ĐỀ CHÍNH
 # ══════════════════════════════════════════════════════════════════════════════
 st.markdown("""
-<div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;
-            color:var(--text-color);opacity:0.7;padding-bottom:12px;
-            border-bottom:1px solid rgba(128,128,128,0.2);margin-bottom:16px;">
-    📊  Đánh giá chất lượng toàn diện — Benchmark
+<div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            color:#2563EB;padding-bottom:12px;border-bottom:1px solid rgba(148,163,184,0.22);margin-bottom:18px;">
+    📊  ĐÁNH GIÁ CHẤT LƯỢNG TOÀN DIỆN — BENCHMARK SESSIONS
 </div>
 """, unsafe_allow_html=True)
 
@@ -423,7 +431,7 @@ with tab_ocr:
                 st.markdown(
                     f'<iframe src="data:application/pdf;base64,{b64}" '
                     f'width="100%" height="{height}" type="application/pdf" '
-                    f'style="border:1px solid var(--border-color); border-radius:var(--vnpt-radius-md);">'
+                    f'style="border:1px solid var(--border-color); border-radius:var(--app-radius-lg);">'
                     f'</iframe>',
                     unsafe_allow_html=True,
                 )
@@ -513,9 +521,9 @@ with tab_ocr:
                     ocr_ok = ocr_md_path is not None
 
                     st.write("")
-                    gt_badge = f'<span class="vnpt-check-item {"ok" if gt_ok else "bad"}">{icon("check" if gt_ok else "cross", 13)} Ground Truth (.json)</span>'
-                    ocr_badge = f'<span class="vnpt-check-item {"ok" if ocr_ok else "bad"}">{icon("check" if ocr_ok else "cross", 13)} Prediction OCR (*_ocr.md)</span>'
-                    st.markdown(f'<div class="vnpt-check-row">{gt_badge}{ocr_badge}</div>', unsafe_allow_html=True)
+                    gt_badge = f'<span class="app-check-item {"ok" if gt_ok else "bad"}">{icon("check" if gt_ok else "cross", 13)} Ground Truth (.json)</span>'
+                    ocr_badge = f'<span class="app-check-item {"ok" if ocr_ok else "bad"}">{icon("check" if ocr_ok else "cross", 13)} Prediction OCR (*_ocr.md)</span>'
+                    st.markdown(f'<div class="app-check-row">{gt_badge}{ocr_badge}</div>', unsafe_allow_html=True)
 
                     if not gt_ok:
                         st.write("")
@@ -653,15 +661,15 @@ with tab_ocr:
 
                 c1, c2, c3 = st.columns(3)
                 with c1:
-                    st.markdown(f'<div class="vnpt-metric-card"><div class="m-val">{cer:.2f}%</div><div class="m-lbl">CER (Lỗi ký tự) &darr;</div></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="app-metric-card"><div class="m-val">{cer:.2f}%</div><div class="m-lbl">CER (Lỗi ký tự) &darr;</div></div>', unsafe_allow_html=True)
                 with c2:
-                    st.markdown(f'<div class="vnpt-metric-card"><div class="m-val">{wer:.2f}%</div><div class="m-lbl">WER (Lỗi từ) &darr;</div></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="app-metric-card"><div class="m-val">{wer:.2f}%</div><div class="m-lbl">WER (Lỗi từ) &darr;</div></div>', unsafe_allow_html=True)
                 with c3:
-                    st.markdown(f'<div class="vnpt-metric-card"><div class="m-val">{ned:.2f}%</div><div class="m-lbl">Reading Order (Mạch đọc) &uarr;</div></div>', unsafe_allow_html=True)
+                    st.markdown(f'<div class="app-metric-card"><div class="m-val">{ned:.2f}%</div><div class="m-lbl">Reading Order (Mạch đọc) &uarr;</div></div>', unsafe_allow_html=True)
 
                 st.write("")
                 st.markdown(
-                    f'<div class="vnpt-section-title" style="font-size:14px;text-transform:uppercase;letter-spacing:1px;">'
+                    f'<div class="app-section-title" style="font-size:14px;text-transform:uppercase;letter-spacing:1px;">'
                     f'{icon("gauge", 17)} Đánh giá theo bộ tiêu chuẩn Benchmark</div>',
                     unsafe_allow_html=True,
                 )

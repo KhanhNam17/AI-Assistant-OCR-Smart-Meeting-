@@ -70,30 +70,64 @@ st.markdown("""
 <style>
     .stButton > button[kind="primary"],
     .stDownloadButton > button[kind="primary"] {
-        background: #0067B1 !important; border: none !important;
-        font-weight: 600 !important; color: white !important;
+        background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%) !important;
+        border: none !important;
+        font-weight: 600 !important;
+        color: white !important;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important;
+        border-radius: 10px !important;
     }
-    .stButton > button[kind="primary"]:hover { background: #004C87 !important; }
-    hr { border-color: rgba(128,128,128,0.2) !important; }
-    .stat-card { background:var(--secondary-background-color);
-        border:1px solid rgba(128,128,128,0.2); border-radius:8px;
-        padding:16px 20px; text-align:center; }
-    .stat-num { font-family:'IBM Plex Mono',monospace; font-size:26px; font-weight:700;
-        color:#0067B1; display:block; }
-    .stat-lbl { font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:1.5px;
-        text-transform:uppercase; color:var(--text-color); opacity:0.55;
-        margin-top:4px; display:block; }
-    .empty-state { padding:60px 20px; text-align:center; color:var(--text-color);
-        opacity:0.45; font-size:14px; }
-    .empty-icon { font-size:36px; margin-bottom:12px; display:block; }
+    .stButton > button[kind="primary"]:hover {
+        filter: brightness(1.08) !important;
+        box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45) !important;
+    }
+    hr { border-color: rgba(148, 163, 184, 0.25) !important; }
+    .stat-card {
+        background: var(--secondary-background-color);
+        border: 1px solid rgba(148, 163, 184, 0.22);
+        border-radius: 14px;
+        padding: 18px 20px;
+        text-align: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        transition: all 0.2s ease;
+    }
+    .stat-card:hover {
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+        border-color: rgba(37, 99, 235, 0.4);
+    }
+    .stat-num {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 28px;
+        font-weight: 800;
+        color: #2563EB;
+        display: block;
+    }
+    .stat-lbl {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-color);
+        opacity: 0.65;
+        margin-top: 4px;
+        display: block;
+        font-weight: 600;
+    }
+    .empty-state {
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--text-color);
+        opacity: 0.65;
+        font-size: 14px;
+    }
+    .empty-icon { font-size: 36px; margin-bottom: 12px; display: block; }
 </style>
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;
-            color:var(--text-color);opacity:0.7;padding-bottom:12px;
-            border-bottom:1px solid rgba(128,128,128,0.2);margin-bottom:24px;">
-    🪪  Quản lý VoiceID — Cơ sở dữ liệu nhận diện giọng nói
+<div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+            color:#2563EB;padding-bottom:12px;border-bottom:1px solid rgba(148,163,184,0.22);margin-bottom:24px;">
+    🪪  QUẢN LÝ VOICEID — CƠ SỞ DỮ LIỆU NHẬN DIỆN GIỌNG NÓI
 </div>
 """, unsafe_allow_html=True)
 
@@ -124,7 +158,7 @@ if "adddata_audio_q" not in st.session_state:
     st.session_state["adddata_audio_q"] = queue.Queue()
 
 # Bổ sung thêm CSS cho dấu chấm đỏ nhấp nháy
-st.markdown("<style>@keyframes rec-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } } .rec-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #0067B1; animation: rec-blink 1s ease-in-out infinite; margin-right: 8px; }</style>", unsafe_allow_html=True)
+st.markdown("<style>@keyframes rec-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } } .rec-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #EF4444; animation: rec-blink 1s ease-in-out infinite; margin-right: 8px; }</style>", unsafe_allow_html=True)
 
 def _toast(kind, msg):
     if kind == "success": st.toast(f"✅ {msg}", icon="✅")
@@ -205,7 +239,7 @@ if st.session_state.get("vid_show_move_popup"):
         with st.container(border=True):
             st.markdown(
                 '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;'
-                'letter-spacing:2px;text-transform:uppercase;color:#0067B1;'
+                'letter-spacing:2px;text-transform:uppercase;color:#2563EB;'
                 'margin-bottom:14px;">// CHUYỂN NHÓM VOICEID</div>',
                 unsafe_allow_html=True)
 
@@ -270,7 +304,7 @@ if st.session_state.get("vid_show_creategroup_popup"):
     with st.container(border=True):
         st.markdown(
             '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;'
-            'letter-spacing:2px;text-transform:uppercase;color:#0067B1;'
+            'letter-spacing:2px;text-transform:uppercase;color:#2563EB;'
             'margin-bottom:14px;">// TẠO NHÓM VOICEID MỚI</div>',
             unsafe_allow_html=True)
 
@@ -312,7 +346,7 @@ if st.session_state.get("vid_edit_target"):
         with st.container(border=True):
             st.markdown(
                 '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;'
-                'letter-spacing:2px;text-transform:uppercase;color:#0067B1;'
+                'letter-spacing:2px;text-transform:uppercase;color:#2563EB;'
                 'margin-bottom:14px;">// CHỈNH SỬA TÊN VOICEID</div>',
                 unsafe_allow_html=True)
             st.caption(f"ID: `{_vid_edit}`")
@@ -357,7 +391,7 @@ if st.session_state.vid_show_adddata_popup:
         with st.container(border=True):
             st.markdown(
                 '<div style="font-family:\'IBM Plex Mono\',monospace;font-size:11px;'
-                'letter-spacing:2px;text-transform:uppercase;color:#0067B1;'
+                'letter-spacing:2px;text-transform:uppercase;color:#2563EB;'
                 'margin-bottom:14px;">// THÊM AUDIO VÀO VOICEID ĐÃ CÓ</div>',
                 unsafe_allow_html=True)
 
@@ -447,7 +481,7 @@ if st.session_state.vid_show_adddata_popup:
                     dur = time.time() - st.session_state.adddata_rec_start
                     st.markdown(f"<div style='margin-top:8px; display:flex; align-items:center;'>"
                                 f"<span class='rec-dot'></span>"
-                                f"<span style='color:#0067B1; font-weight:bold; font-family:monospace;'>ĐANG THU ÂM TRỰC TIẾP... {dur:.1f}s</span>"
+                                f"<span style='color:#EF4444; font-weight:bold; font-family:monospace;'>ĐANG THU ÂM TRỰC TIẾP... {dur:.1f}s</span>"
                                 f"</div>", unsafe_allow_html=True)
                     
                     while not st.session_state.adddata_audio_q.empty():
@@ -564,8 +598,8 @@ else:
         
         for i, (h, align) in enumerate(headers):
             h_cols[i].markdown(
-                f'<div style="font-family:\'IBM Plex Mono\',monospace;font-size:10px;'
-                f'letter-spacing:1.5px;text-transform:uppercase;color:#0067B1;'
+                f'<div style="font-family:\'JetBrains Mono\',monospace;font-size:10px;'
+                f'letter-spacing:1.5px;text-transform:uppercase;color:#2563EB;'
                 f'padding-bottom:8px;font-weight:600;text-align:{align};">{h}</div>',
                 unsafe_allow_html=True)
 

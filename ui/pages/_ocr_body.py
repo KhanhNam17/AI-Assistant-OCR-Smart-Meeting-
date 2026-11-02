@@ -100,27 +100,27 @@ def render_ocr_mode():
     # ── Page CSS ────────────────────────────────────────────────────────────────
     st.markdown("""
     <style>
-        .vnpt-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 24px; }
-        .vnpt-stat-field .vnpt-info-label {
+        .app-stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 24px; }
+        .app-stat-field .app-info-label {
             font-size: 11px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase;
             color: var(--text-color); opacity: 0.55; margin-bottom: 3px;
         }
-        .vnpt-stat-field .vnpt-info-value { font-size: 13.5px; font-weight: 600; word-break: break-word; }
+        .app-stat-field .app-info-value { font-size: 13.5px; font-weight: 600; word-break: break-word; }
 
-        .vnpt-uploader-empty {
-            border: 1.5px dashed var(--border-color); border-radius: var(--vnpt-radius-md);
+        .app-uploader-empty {
+            border: 1.5px dashed var(--border-color); border-radius: var(--app-radius-md);
             padding: 18px; text-align: center; color: var(--text-color); opacity: 0.55;
             font-size: 12.5px; margin-top: 6px;
         }
 
         /* Stepper styles */
-        .stepper-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 16px 30px; background: var(--secondary-background-color); border-radius: var(--vnpt-radius-lg); border: 1px solid var(--border-color); box-shadow: var(--vnpt-shadow-sm); }
+        .stepper-container { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 16px 30px; background: var(--secondary-background-color); border-radius: var(--app-radius-lg); border: 1px solid var(--border-color); box-shadow: var(--app-shadow-sm); }
         .step { display: flex; align-items: center; gap: 11px; width: 140px; text-align: center; }
         .step-icon { min-width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; background: var(--background-color); color: var(--text-color); border: 2px solid var(--border-color); transition: 0.25s; }
-        .step-icon.active { background: var(--vnpt-green); border-color: var(--vnpt-green); box-shadow: 0 0 0 4px var(--vnpt-green-tint); }
+        .step-icon.active { background: var(--app-green); border-color: var(--app-green); box-shadow: 0 0 0 4px var(--app-green-tint); }
         .step-label { font-size: 14px; font-weight: 700; color: var(--text-color); white-space: nowrap; }
         .step-line { flex-grow: 1; height: 3px; background: var(--border-color); margin: 0 20px; border-radius: 2px; transition: 0.3s; }
-        .step-line.active { background: var(--vnpt-green); }
+        .step-line.active { background: var(--app-green); }
     </style>
     """, unsafe_allow_html=True)
 
@@ -375,7 +375,7 @@ def render_ocr_mode():
 
     render_page_header(
         "OCR TÀI LIỆU",
-        f"Engine nhận diện: <b style=\'color:var(--vnpt-blue);text-transform:uppercase;\'>{current_engine}</b>",
+        f"Engine nhận diện: <b style=\'color:var(--app-blue);text-transform:uppercase;\'>{current_engine}</b>",
         eyebrow="Document OCR processing",
     )
     st.write("")
@@ -417,11 +417,11 @@ def render_ocr_mode():
                 ("Số trang", info.get("Số trang", "--")),
             ]
             fields_html = "".join(
-                f'<div class="vnpt-stat-field"><div class="vnpt-info-label">{label}</div>'
-                f'<div class="vnpt-info-value">{value}</div></div>'
+                f'<div class="app-stat-field"><div class="app-info-label">{label}</div>'
+                f'<div class="app-info-value">{value}</div></div>'
                 for label, value in fields
             )
-            st.markdown(f'<div class="vnpt-stat-row">{fields_html}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="app-stat-row">{fields_html}</div>', unsafe_allow_html=True)
             st.write("")
 
             if st.session_state.is_running:
@@ -483,7 +483,7 @@ def render_ocr_mode():
 
         # 2. Xuất kết quả OCR
         with st.container(border=True):
-            st.markdown(f'<span class="vnpt-pill-label">{icon("download", 14)} Export kết quả OCR</span>', unsafe_allow_html=True)
+            st.markdown(f'<span class="app-pill-label">{icon("download", 14)} Export kết quả OCR</span>', unsafe_allow_html=True)
 
             if outputs_exist and not st.session_state.is_running:
                 run_dir = Path(st.session_state.last_run_dir)
@@ -500,19 +500,19 @@ def render_ocr_mode():
                              subtitle: str, mime: str, primary: bool = False) -> None:
                 ready = file_path is not None
                 status_html = (
-                    f'<span class="vnpt-export-status ready">{icon("check", 11)} {_fmt_size(file_path)}</span>'
+                    f'<span class="app-export-status ready">{icon("check", 11)} {_fmt_size(file_path)}</span>'
                     if ready else
-                    f'<span class="vnpt-export-status empty">{icon("cross", 11)} Chưa có</span>'
+                    f'<span class="app-export-status empty">{icon("cross", 11)} Chưa có</span>'
                 )
-                row_cls = "vnpt-export-row ready" if ready else "vnpt-export-row empty"
+                row_cls = "app-export-row ready" if ready else "app-export-row empty"
                 row_col, btn_col = st.columns([4.4, 1.3], vertical_alignment="center")
                 with row_col:
                     st.markdown(
                         f'<div class="{row_cls}">'
-                        f'<div class="vnpt-export-icon {file_kind}">{icon("docx" if file_kind == "docx" else "scan", 17)}</div>'
-                        f'<div class="vnpt-export-meta">'
-                        f'<div class="vnpt-export-title">{title}</div>'
-                        f'<div class="vnpt-export-sub">{subtitle}</div>'
+                        f'<div class="app-export-icon {file_kind}">{icon("docx" if file_kind == "docx" else "scan", 17)}</div>'
+                        f'<div class="app-export-meta">'
+                        f'<div class="app-export-title">{title}</div>'
+                        f'<div class="app-export-sub">{subtitle}</div>'
                         f'</div>{status_html}</div>',
                         unsafe_allow_html=True,
                     )

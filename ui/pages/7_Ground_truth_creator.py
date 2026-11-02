@@ -68,111 +68,111 @@ render_sidebar(active="gt")
 
 st.markdown("""
     <style>
-    .vnpt-debug-box {
+    .app-debug-box {
         font-size: 11px; opacity: 0.6; line-height: 1.7; margin-top: 4px;
     }
-    .vnpt-debug-box code { font-size: 10.5px; }
+    .app-debug-box code { font-size: 10.5px; }
 
     /* ── Themed alert boxes (replace bare st.info/warning/error) ─── */
-    .vnpt-alert {
+    .app-alert {
         display: flex; gap: 11px; align-items: flex-start;
-        border-radius: var(--vnpt-radius-md);
+        border-radius: var(--app-radius-md);
         border: 1px solid var(--border-color);
         padding: 13px 15px; margin: 6px 0 4px;
         font-size: 13.3px; line-height: 1.55;
     }
-    .vnpt-alert svg { flex-shrink: 0; margin-top: 1px; }
-    .vnpt-alert b { font-weight: 700; }
-    .vnpt-alert-info    { background: var(--vnpt-blue-tint);  color: var(--vnpt-blue); }
-    .vnpt-alert-info    b { color: var(--text-color); }
-    .vnpt-alert-success { background: var(--vnpt-green-tint); color: var(--vnpt-green); }
-    .vnpt-alert-success b { color: var(--text-color); }
-    .vnpt-alert-warn    { background: var(--vnpt-amber-tint); color: var(--vnpt-amber); }
-    .vnpt-alert-warn    b { color: var(--text-color); }
-    .vnpt-alert-error   { background: var(--vnpt-red-tint);   color: var(--vnpt-red); }
-    .vnpt-alert-error   b { color: var(--text-color); }
-    .vnpt-alert-body { color: var(--text-color); opacity: 0.82; }
+    .app-alert svg { flex-shrink: 0; margin-top: 1px; }
+    .app-alert b { font-weight: 700; }
+    .app-alert-info    { background: var(--app-blue-tint);  color: var(--app-blue); }
+    .app-alert-info    b { color: var(--text-color); }
+    .app-alert-success { background: var(--app-green-tint); color: var(--app-green); }
+    .app-alert-success b { color: var(--text-color); }
+    .app-alert-warn    { background: var(--app-amber-tint); color: var(--app-amber); }
+    .app-alert-warn    b { color: var(--text-color); }
+    .app-alert-error   { background: var(--app-red-tint);   color: var(--app-red); }
+    .app-alert-error   b { color: var(--text-color); }
+    .app-alert-body { color: var(--text-color); opacity: 0.82; }
 
     /* ── Empty-state panel (no sessions yet) ──────────────────────── */
-    .vnpt-empty-state {
+    .app-empty-state {
         text-align: center; padding: 46px 24px 40px;
         border: 1.5px dashed var(--border-color);
-        border-radius: var(--vnpt-radius-lg);
+        border-radius: var(--app-radius-lg);
         background: rgba(255,255,255,0.015);
     }
-    .vnpt-empty-state .e-icon {
+    .app-empty-state .e-icon {
         width: 52px; height: 52px; border-radius: 50%;
         display: inline-flex; align-items: center; justify-content: center;
-        background: var(--vnpt-blue-tint); color: var(--vnpt-blue);
+        background: var(--app-blue-tint); color: var(--app-blue);
         margin-bottom: 16px;
     }
-    .vnpt-empty-state .e-title {
+    .app-empty-state .e-title {
         font-size: 16.5px; font-weight: 800; color: var(--text-color); margin-bottom: 8px;
     }
-    .vnpt-empty-state .e-body {
+    .app-empty-state .e-body {
         font-size: 13.3px; color: var(--text-color); opacity: 0.65;
         max-width: 480px; margin: 0 auto; line-height: 1.65;
     }
-    .vnpt-empty-state code {
-        font-size: 12px; background: var(--vnpt-blue-tint); padding: 1px 6px; border-radius: 5px;
+    .app-empty-state code {
+        font-size: 12px; background: var(--app-blue-tint); padding: 1px 6px; border-radius: 5px;
     }
 
     /* ── Control-bar labels above the session/page selectors ──────── */
-    .vnpt-ctrl-label {
+    .app-ctrl-label {
         display: flex; align-items: center; gap: 7px;
         font-size: 11px; font-weight: 800; letter-spacing: 0.9px;
         text-transform: uppercase; color: var(--text-color); opacity: 0.55;
         margin-bottom: 6px;
     }
-    .vnpt-ctrl-label svg { color: var(--vnpt-blue); opacity: 1; }
+    .app-ctrl-label svg { color: var(--app-blue); opacity: 1; }
 
     /* ── Block-type badges inside each GT block card ──────────────── */
-    .vnpt-type-badge {
+    .app-type-badge {
         display: inline-flex; align-items: center; gap: 6px;
         font-size: 11px; font-weight: 800; letter-spacing: 0.4px;
         padding: 4px 10px; border-radius: 999px; text-transform: uppercase;
     }
-    .vnpt-type-text        { background: var(--vnpt-blue-tint);  color: var(--vnpt-blue); }
-    .vnpt-type-image       { background: var(--vnpt-amber-tint); color: var(--vnpt-amber); }
-    .vnpt-type-figure_title{ background: var(--vnpt-amber-tint); color: var(--vnpt-amber); }
-    .vnpt-type-table       { background: var(--vnpt-green-tint); color: var(--vnpt-green); }
-    .vnpt-type-title       { background: rgba(148,99,255,0.14); color: #8B5CF6; }
-    .vnpt-type-sub_title   { background: rgba(148,99,255,0.14); color: #8B5CF6; }
+    .app-type-text        { background: var(--app-blue-tint);  color: var(--app-blue); }
+    .app-type-image       { background: var(--app-amber-tint); color: var(--app-amber); }
+    .app-type-figure_title{ background: var(--app-amber-tint); color: var(--app-amber); }
+    .app-type-table       { background: var(--app-green-tint); color: var(--app-green); }
+    .app-type-title       { background: rgba(148,99,255,0.14); color: #8B5CF6; }
+    .app-type-sub_title   { background: rgba(148,99,255,0.14); color: #8B5CF6; }
 
     /* ── Block card header row ─────────────────────────────────────── */
-    .vnpt-block-head {
+    .app-block-head {
         display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
     }
-    .vnpt-block-head .vnpt-block-order { margin-right: 0; }
+    .app-block-head .app-block-order { margin-right: 0; }
 
     /* ── "Added missing" flag panel ───────────────────────────────── */
-    .vnpt-flag-panel {
-        border-radius: var(--vnpt-radius-sm);
+    .app-flag-panel {
+        border-radius: var(--app-radius-sm);
         border: 1px solid var(--border-color);
         padding: 2px 4px; margin-top: 10px;
     }
 
     /* ── Live pulse dot for the JSON preview panel ────────────────── */
-    .vnpt-live-dot {
+    .app-live-dot {
         width: 7px; height: 7px; border-radius: 50%; display: inline-block;
-        background: var(--vnpt-green); box-shadow: 0 0 0 3px var(--vnpt-green-tint);
-        animation: vnpt-pulse 1.6s ease-in-out infinite;
+        background: var(--app-green); box-shadow: 0 0 0 3px var(--app-green-tint);
+        animation: app-pulse 1.6s ease-in-out infinite;
     }
-    @keyframes vnpt-pulse {
+    @keyframes app-pulse {
         0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
     }
-    .vnpt-panel-head {
+    .app-panel-head {
         display: flex; align-items: center; justify-content: space-between;
         margin-bottom: 2px;
     }
-    .vnpt-panel-head .ph-title {
+    .app-panel-head .ph-title {
         display: flex; align-items: center; gap: 8px;
         font-size: 16.5px; font-weight: 800; color: var(--text-color);
     }
-    .vnpt-panel-head .ph-live {
+    .app-panel-head .ph-live {
         display: inline-flex; align-items: center; gap: 6px;
         font-size: 10.5px; font-weight: 800; letter-spacing: 1px;
-        color: var(--vnpt-green); text-transform: uppercase;
+        color: var(--app-green); text-transform: uppercase;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -180,11 +180,11 @@ st.markdown("""
 
 def alert(kind: str, title: str, body: str = "") -> None:
     """Themed replacement for st.info/success/warning/error — matches the
-    VNPT palette instead of Streamlit's default alert colors."""
+    modern palette instead of Streamlit's default alert colors."""
     icon_map = {"info": "info", "success": "check", "warn": "alert", "error": "cross"}
-    body_html = f'<div class="vnpt-alert-body">{body}</div>' if body else ""
+    body_html = f'<div class="app-alert-body">{body}</div>' if body else ""
     st.markdown(
-        f'<div class="vnpt-alert vnpt-alert-{kind}">'
+        f'<div class="app-alert app-alert-{kind}">'
         f'{icon(icon_map.get(kind, "info"), 18)}'
         f'<div><b>{title}</b>{body_html}</div>'
         f'</div>',
@@ -197,10 +197,10 @@ PAGE_SEP    = "\n\n---\n\n"
 with st.sidebar:
     st.markdown(
         f"""
-        <div class="vnpt-debug-box">
-            Repo root dò được:<br><code>{_REPO_ROOT}</code><br><br>
-            Output root: <code>{OUTPUT_ROOT}</code><br>
-            {"Tồn tại" if OUTPUT_ROOT.exists() else "Không tồn tại"}
+        <div class="app-debug-box">
+            <span style="opacity:0.75;font-weight:600;">Repo root dò được:</span><br><code>{_REPO_ROOT}</code><br><br>
+            <span style="opacity:0.75;font-weight:600;">Output root:</span><br><code>{OUTPUT_ROOT}</code><br>
+            <span style="display:inline-block;margin-top:6px;font-weight:700;color:{'#10B981' if OUTPUT_ROOT.exists() else '#EF4444'};">● {"Tồn tại" if OUTPUT_ROOT.exists() else "Không tồn tại"}</span>
         </div>
         """,
         unsafe_allow_html=True,
@@ -256,7 +256,7 @@ def display_pdf(file_path: Path, height: int = 480, key: str | None = None) -> N
     st.markdown(
         f'<iframe src="data:application/pdf;base64,{b64}" '
         f'width="100%" height="{height}" type="application/pdf" '
-        f'style="border:1px solid var(--border-color); border-radius:var(--vnpt-radius-md);">'
+        f'style="border:1px solid var(--border-color); border-radius:var(--app-radius-md);">'
         f'</iframe>',
         unsafe_allow_html=True,
     )
@@ -704,7 +704,7 @@ sessions = discover_sessions()
 if not sessions:
     st.markdown(
         f"""
-        <div class="vnpt-empty-state">
+        <div class="app-empty-state">
             <div class="e-icon">{icon('folder', 26, 1.7)}</div>
             <div class="e-title">Chưa có phiên xử lý nào</div>
             <div class="e-body">
@@ -730,7 +730,7 @@ with st.container(border=True):
     ]
     with sel_col1:
         st.markdown(
-            f'<div class="vnpt-ctrl-label">{icon("folder", 13)} PHIÊN XỬ LÝ</div>',
+            f'<div class="app-ctrl-label">{icon("folder", 13)} PHIÊN XỬ LÝ</div>',
             unsafe_allow_html=True,
         )
         sel_idx = st.selectbox(
@@ -747,7 +747,7 @@ with st.container(border=True):
 
     with sel_col2:
         st.markdown(
-            f'<div class="vnpt-ctrl-label">{icon("grid", 13)} TRANG</div>',
+            f'<div class="app-ctrl-label">{icon("grid", 13)} TRANG</div>',
             unsafe_allow_html=True,
         )
         page_num = st.number_input(
@@ -758,7 +758,7 @@ with st.container(border=True):
 
     with sel_col3:
         st.markdown(
-            f'<div class="vnpt-ctrl-label">{icon("layers", 13)} TỔNG SỐ TRANG</div>',
+            f'<div class="app-ctrl-label">{icon("layers", 13)} TỔNG SỐ TRANG</div>',
             unsafe_allow_html=True,
         )
         st.metric("Tổng số trang", n_pages, label_visibility="collapsed")
@@ -766,9 +766,9 @@ with st.container(border=True):
     st.markdown(
         f"""
         <div style="margin-top:2px">
-            <span class="vnpt-tag">{run_dir.name}</span>
-            <span class="vnpt-tag" style="margin-left:6px">{stem}</span>
-            <span class="vnpt-badge vnpt-badge-info" style="margin-left:6px">
+            <span class="app-tag">{run_dir.name}</span>
+            <span class="app-tag" style="margin-left:6px">{stem}</span>
+            <span class="app-badge app-badge-info" style="margin-left:6px">
                 {icon('scan', 11)} Trang {page_num} / {n_pages}
             </span>
         </div>
@@ -799,7 +799,7 @@ if cache_key not in st.session_state.gt_cache:
 
 st.markdown(
     f"""
-    <div class="vnpt-section-title" style="margin-bottom:2px">
+    <div class="app-section-title" style="margin-bottom:2px">
         {icon("compare", 19)} Khu vực Đối chiếu
     </div>
     <div style="font-size:13px; opacity:0.6; margin-bottom:16px;">
@@ -813,7 +813,7 @@ top_col1, top_col2 = st.columns(2)
 with top_col1:
     with st.container(border=True):
         st.markdown(
-            f'<span class="vnpt-badge vnpt-badge-info">{icon("docx", 12)} File PDF của phiên này</span>',
+            f'<span class="app-badge app-badge-info">{icon("docx", 12)} File PDF của phiên này</span>',
             unsafe_allow_html=True,
         )
         st.write("")
@@ -831,7 +831,7 @@ with top_col1:
 with top_col2:
     with st.container(border=True):
         st.markdown(
-            f'<span class="vnpt-badge vnpt-badge-on">{icon("check", 12)} Bản OCR của đúng trang này (copy sang block bên dưới)</span>',
+            f'<span class="app-badge app-badge-on">{icon("check", 12)} Bản OCR của đúng trang này (copy sang block bên dưới)</span>',
             unsafe_allow_html=True,
         )
         st.write("")
@@ -850,7 +850,7 @@ st.write("")
 # ══════════════════════════════════════════════════════════════════════════
 
 st.markdown(
-    f'<div class="vnpt-section-title">{icon("layers", 19)} Trình tạo Ground Truth JSON (Theo Block)</div>',
+    f'<div class="app-section-title">{icon("layers", 19)} Trình tạo Ground Truth JSON (Theo Block)</div>',
     unsafe_allow_html=True,
 )
 bot_col1, bot_col2 = st.columns([1.3, 1])
@@ -889,7 +889,7 @@ _BLOCK_TYPES = ["text", "image", "table", "title", "sub_title", "figure_title"]
 with bot_col1:
     with st.container(border=True):
         st.markdown(
-            f'<div class="vnpt-section-title" style="margin:0 0 10px">'
+            f'<div class="app-section-title" style="margin:0 0 10px">'
             f'{icon("package", 18)} Quản lý danh sách Block</div>',
             unsafe_allow_html=True,
         )
@@ -898,13 +898,13 @@ with bot_col1:
         existing_path = gt_file_path(run_dir, page_num)
         if existing_path.exists():
             st.markdown(
-                f'<span class="vnpt-badge vnpt-badge-on">{icon("check", 11)} '
+                f'<span class="app-badge app-badge-on">{icon("check", 11)} '
                 f'Đã có GT đã lưu · <code>{existing_path.name}</code></span>',
                 unsafe_allow_html=True,
             )
         else:
             st.markdown(
-                f'<span class="vnpt-badge vnpt-badge-neutral">{icon("info", 11)} '
+                f'<span class="app-badge app-badge-neutral">{icon("info", 11)} '
                 f'Chưa lưu GT cho trang này</span>',
                 unsafe_allow_html=True,
             )
@@ -916,7 +916,7 @@ with bot_col1:
         if not blocks:
             st.markdown(
                 f"""
-                <div class="vnpt-empty-state" style="padding:32px 20px">
+                <div class="app-empty-state" style="padding:32px 20px">
                     <div class="e-icon">{icon('layers', 22, 1.7)}</div>
                     <div class="e-title">Chưa có block nào</div>
                     <div class="e-body">Bấm "Thêm Block Mới" bên dưới để bắt đầu.</div>
@@ -933,10 +933,10 @@ with bot_col1:
         for i, block in enumerate(blocks):
             _btype = block["type"] if block["type"] in _TYPE_BADGE_ICON else "text"
             st.markdown(
-                f'<div class="vnpt-block-card">'
-                f'<div class="vnpt-block-head">'
-                f'<span class="vnpt-block-order">{i + 1}</span>'
-                f'<span class="vnpt-type-badge vnpt-type-{_btype}">'
+                f'<div class="app-block-card">'
+                f'<div class="app-block-head">'
+                f'<span class="app-block-order">{i + 1}</span>'
+                f'<span class="app-type-badge app-type-{_btype}">'
                 f'{icon(_TYPE_BADGE_ICON[_btype], 12)} {block["type"]}</span>'
                 f'</div>',
                 unsafe_allow_html=True,
@@ -993,9 +993,9 @@ with bot_col1:
                     height=90,
                 )
 
-            _flag_bg = "var(--vnpt-amber-tint)" if block["added_missing"] else "transparent"
+            _flag_bg = "var(--app-amber-tint)" if block["added_missing"] else "transparent"
             st.markdown(
-                f'<div class="vnpt-flag-panel" style="background:{_flag_bg}">',
+                f'<div class="app-flag-panel" style="background:{_flag_bg}">',
                 unsafe_allow_html=True,
             )
             block["added_missing"] = st.checkbox(
@@ -1018,9 +1018,9 @@ with bot_col2:
     with st.container(border=True):
         st.markdown(
             f"""
-            <div class="vnpt-panel-head">
+            <div class="app-panel-head">
                 <div class="ph-title">{icon('cpu', 18)} Master JSON Preview</div>
-                <div class="ph-live"><span class="vnpt-live-dot"></span> LIVE</div>
+                <div class="ph-live"><span class="app-live-dot"></span> LIVE</div>
             </div>
             """,
             unsafe_allow_html=True,
@@ -1043,8 +1043,8 @@ with bot_col2:
         st.markdown(
             f"""
             <div style="margin:2px 0 12px">
-                <span class="vnpt-badge vnpt-badge-info">{icon('layers', 11)} {len(final_blocks)} block</span>
-                <span class="vnpt-badge {'vnpt-badge-off' if _n_missing else 'vnpt-badge-neutral'}" style="margin-left:6px">
+                <span class="app-badge app-badge-info">{icon('layers', 11)} {len(final_blocks)} block</span>
+                <span class="app-badge {'app-badge-off' if _n_missing else 'app-badge-neutral'}" style="margin-left:6px">
                     {icon('flag', 11)} {_n_missing} added-missing
                 </span>
             </div>
